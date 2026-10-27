@@ -17,9 +17,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import raycraft as rc  # noqa: E402
 from raycraft import analysis, library, materials  # noqa: E402
+from raycraft.console import force_utf8  # noqa: E402
 from raycraft.optimize import Optimizer, Variable, default_variables, multi_start  # noqa: E402
 from raycraft.surface import Surface  # noqa: E402
 from raycraft.system import OpticalSystem  # noqa: E402
+
+force_utf8()
 
 BAR = "═" * 74
 

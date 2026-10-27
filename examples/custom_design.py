@@ -23,9 +23,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
 from raycraft import analysis, materials  # noqa: E402
+from raycraft.console import force_utf8  # noqa: E402
 from raycraft.optimize import Optimizer, Variable, default_variables  # noqa: E402
 from raycraft.surface import Surface  # noqa: E402
 from raycraft.system import OpticalSystem  # noqa: E402
+
+force_utf8()
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
 

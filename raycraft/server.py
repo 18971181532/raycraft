@@ -23,6 +23,8 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Dict, Optional, Tuple
 
+from .console import force_utf8
+
 from . import analysis, library, materials
 
 WEB_ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "web")
@@ -203,6 +205,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def serve(host: str = "127.0.0.1", port: int = 8781) -> None:
+    force_utf8()
     httpd = ThreadingHTTPServer((host, port), Handler)
     httpd.daemon_threads = True
     print(f"RayCraft 工作台已启动： http://{host}:{port}")

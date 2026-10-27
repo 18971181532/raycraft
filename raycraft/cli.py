@@ -8,6 +8,7 @@ import sys
 from typing import List, Optional
 
 from . import analysis, library, materials
+from .console import force_utf8
 from .optimize import Optimizer, Variable, default_variables, multi_start
 
 
@@ -214,6 +215,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Optional[List[str]] = None) -> int:
+    force_utf8()
     parser = build_parser()
     args = parser.parse_args(argv)
     if not getattr(args, "func", None):

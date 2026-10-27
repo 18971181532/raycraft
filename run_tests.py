@@ -21,6 +21,10 @@ def main(argv: list[str]) -> int:
     sys.path.insert(0, ROOT)
     sys.path.insert(0, os.path.join(ROOT, "tests"))
 
+    from raycraft.console import force_utf8
+
+    force_utf8()
+
     verbosity = 2 if ("-v" in argv or "--verbose" in argv) else 1
     loader = unittest.TestLoader()
     names = [a for a in argv if not a.startswith("-")]
