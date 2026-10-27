@@ -1,5 +1,10 @@
 # RayCraft — 光线追迹与镜头设计工作台
 
+[![tests](https://github.com/18971181532/raycraft/actions/workflows/tests.yml/badge.svg)](https://github.com/18971181532/raycraft/actions/workflows/tests.yml)
+[![python](https://img.shields.io/badge/python-3.8%20%7C%203.10%20%7C%203.12%20%7C%203.13-3776ab)](https://github.com/18971181532/raycraft)
+[![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)](https://github.com/18971181532/raycraft)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 **零依赖的序列式光学系统仿真与自动优化引擎，附带一个手写 Canvas 的浏览器工作台。**
 
 RayCraft 从一纸处方（曲率半径 / 厚度 / 玻璃牌号）出发，做真实的**三维矢量光线追迹**，
@@ -393,7 +398,8 @@ raycraft/
 │   ├── optimize.py           DLS 优化器、变量、约束、多起点
 │   ├── library.py            4 个镜头处方 + 回归基准
 │   ├── cli.py                命令行子命令
-│   └── server.py             http.server 路由与静态文件服务
+│   ├── server.py             http.server 路由与静态文件服务
+│   └── console.py            标准流 UTF-8 兜底（Windows 管道输出）
 ├── web/                      浏览器工作台（手写 Canvas，无框架）
 │   ├── index.html            6 个标签页的骨架
 │   ├── style.css             浅色专业风格
@@ -446,7 +452,9 @@ $ python run_tests.py
 - **优化器**：线性方程组、奇异矩阵、merit 单调下降、变量钳位、镜像联动、结构约束
 - **接口**：7 个 HTTP 接口的返回结构、404 分支、路径穿越防护、CLI 各子命令
 
-CI（GitHub Actions）在 Python 3.8 / 3.10 / 3.12 上各跑一遍。
+CI（GitHub Actions）在 6 个环境上各跑一遍：Python 3.8 / 3.10 / 3.12 / 3.13（Ubuntu），
+以及 Python 3.12（Windows、macOS）。3.8 固定用 `ubuntu-22.04`——`ubuntu-latest` 已是 26.04，
+官方不再提供该系统的 3.8 预编译包。
 
 ---
 
