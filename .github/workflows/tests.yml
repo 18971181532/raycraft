@@ -1,0 +1,53 @@
+name: tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.8", "3.10", "3.12"]
+        include:
+          - os: windows-latest
+            python-version: "3.12"
+          - os: macos-latest
+            python-version: "3.12"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show version
+        run: python --version
+
+      - name: Run unit tests
+        run: python run_tests.py
+
+      - name: Smoke test the CLI
+        run: |
+          python run.py systems
+          python run.py info --name cooke_triplet
+          python run.py spot --name achromat --rings 3
+          python run.py mtf --name asphere --points 12 --rays 600
+          python run.py field --name singlet
+
+      - name: Run demos
+        run: python run_demos.py 1 2 4 6
+
+      - name: Build a design from scratch
+        run: python examples/custom_design.py
+
+      - name: Check the package imports cleanly
+        run: python -c "import raycraft; print('raycraft', raycraft.__version__); print(len(raycraft.library.names()), 'presets')"

@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raycraft"
+version = "1.0.0"
+description = "零依赖的光线追迹与镜头设计工作台：序列式光学系统仿真、像质评价与阻尼最小二乘优化"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "RayCraft contributors" }]
+keywords = ["optics", "ray-tracing", "lens-design", "aberration", "mtf", "optimization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["playwright>=1.40"]
+
+[project.scripts]
+raycraft = "raycraft.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/<your-name>/raycraft"
+
+[tool.setuptools]
+packages = ["raycraft"]

@@ -1,0 +1,220 @@
+:root {
+  --paper: #f5f6f8;
+  --card: #ffffff;
+  --ink: #17202b;
+  --muted: #5d6b7a;
+  --line: #dfe4ea;
+  --line-soft: #edf1f5;
+  --accent: #1f5fa8;
+  --accent-soft: #e8f0fa;
+  --ray-1: #1f5fa8;
+  --ray-2: #c05621;
+  --ray-3: #2f7d5a;
+  --wl-f: #2b6cb0;
+  --wl-d: #b7791f;
+  --wl-c: #c53030;
+  --shadow: 0 1px 2px rgba(23, 32, 43, .05), 0 8px 24px -16px rgba(23, 32, 43, .28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 { margin: 0; font-weight: 600; letter-spacing: .01em; }
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 32px 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.mark { width: 40px; height: 40px; flex: none; }
+.titles h1 { font-size: 19px; letter-spacing: .02em; }
+.titles p { margin: 1px 0 0; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+
+.controls { display: flex; align-items: flex-end; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: var(--muted); }
+.field > span { letter-spacing: .06em; text-transform: uppercase; }
+.field b { color: var(--ink); font-variant-numeric: tabular-nums; }
+select {
+  appearance: none;
+  min-width: 220px;
+  padding: 7px 30px 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5L6 8.5L10 4.5' fill='none' stroke='%235d6b7a' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 9px center / 12px;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+select:focus-visible, input[type="range"]:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.defocus input { width: 168px; accent-color: var(--accent); }
+.ghost {
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- 指标条 ---------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.metric {
+  background: #fff;
+  padding: 13px 22px 12px;
+}
+.metric .k {
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.metric .v {
+  margin-top: 2px;
+  font-size: 19px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+}
+.metric .v small { font-size: 11px; font-weight: 500; color: var(--muted); margin-left: 3px; }
+
+/* ---------- 标签页 ---------- */
+.tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 32px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+.tab {
+  position: relative;
+  padding: 12px 16px 11px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13.5px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--accent); font-weight: 600; }
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 10px; right: 10px; bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ---------- 主体 ---------- */
+main { padding: 24px 32px 40px; }
+.view { display: none; }
+.view.active { display: block; animation: fade .18s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 20px 22px 18px;
+}
+.card-head { margin-bottom: 14px; }
+.card-head h2 { font-size: 15px; }
+.card-head p { margin: 4px 0 0; font-size: 12.5px; color: var(--muted); max-width: 96ch; }
+
+canvas { display: block; width: 100%; border-radius: 8px; }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 980px) { .split { grid-template-columns: 1fr; } }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i {
+  display: inline-block;
+  width: 16px; height: 3px;
+  border-radius: 2px;
+  background: currentColor;
+}
+.legend i.dot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* ---------- 表格 ---------- */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+thead th {
+  text-align: right;
+  font-size: 11px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 0 12px 8px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+thead th:first-child, tbody td:first-child { text-align: left; padding-left: 4px; }
+tbody td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: right;
+  font-size: 13px;
+}
+tbody tr:hover td { background: #fafbfc; }
+tbody td.stop { color: var(--accent); font-weight: 600; }
+tbody tr.img-row td { color: var(--muted); background: #fbfcfd; border-bottom: none; }
+.tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 11px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 32px 28px;
+  font-size: 12px;
+  color: var(--muted);
+}
+#status.busy { color: var(--accent); }
